@@ -1,25 +1,29 @@
 import React, { useState } from "react";
 
-export default function Forum({ user }) {
+export default function Forum({ user }){
   const [comments, setComments] = useState([]);
-  const [text, setText] = useState("");
+  const [txt, setTxt] = useState("");
 
-  const handleComment = () => {
-    if(!text) return;
-    setComments([...comments, { user: user.email, text }]);
-    setText("");
-  }
+  const post = () => {
+    if(!txt) return;
+    setComments([{ name: user?.name || "Anónimo", text: txt, id: Date.now() }, ...comments]);
+    setTxt("");
+  };
 
   return (
-    <div>
+    <div className="card">
       <h2>Foro</h2>
-      <textarea value={text} onChange={(e)=>setText(e.target.value)} placeholder="Escribe tu comentario" />
-      <button onClick={handleComment}>Comentar</button>
-      <div>
-        {comments.map((c,i)=>(
-          <p key={i}><b>{c.user}:</b> {c.text}</p>
+      <textarea placeholder="Escribe algo..." value={txt} onChange={e=>setTxt(e.target.value)} />
+      <button className="primary" onClick={post}>Publicar</button>
+
+      <div className="mt">
+        {comments.map(c => (
+          <div key={c.id} className="forum-comment">
+            <strong>{c.name}</strong> — <span className="muted small">{new Date(c.id).toLocaleString()}</span>
+            <p>{c.text}</p>
+          </div>
         ))}
       </div>
     </div>
-  );
+  )
 }

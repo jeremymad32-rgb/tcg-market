@@ -1,34 +1,31 @@
 import React, { useState } from "react";
-import Search from "./Search";
+import ProductCard from "./ProductCard";
 
-export default function Shop({ cartItems, setCartItems }) {
-  const [products] = useState([
-    { name: "Pikachu", price: 5, image: "/images/pokemon1.jpg" },
-    { name: "Dark Magician", price: 10, image: "/images/yugioh1.jpg" },
-  ]);
-  const [searchTerm, setSearchTerm] = useState("");
+export default function Shop({ products, query, setQuery }){
+  const [sort, setSort] = useState("new");
+  const filtered = products.filter(p => p.title.toLowerCase().includes((query||"").toLowerCase()));
 
-  const addToCart = (item) => {
-    setCartItems([...cartItems, item]);
-    alert(`${item.name} agregado al carrito`);
-  };
-
-  const filteredProducts = products.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  const sorted = [...filtered].sort((a,b)=>{
+    if(sort==="cheap") return a.price - b.price;
+    if(sort==="exp") return b.price - a.price;
+    return b.id - a.id;
+  });
 
   return (
     <div>
-      <h2>Tienda</h2>
-      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <div className="shop-list">
-        {filteredProducts.map((p,i)=>(
-          <div key={i}>
-            <img src={p.image} width={100} alt={p.name} />
-            <p>{p.name}</p>
-            <p>{p.price} $</p>
-            <button onClick={()=>addToCart(p)}>Comprar</button>
-          </div>
-        ))}
+      <div className="shop-header">
+        <input className="search" placeholder="Buscar cartas por nombre..." value={query} onChange={e=>setQuery(e.target.value)} />
+        <select value={sort} onChange={e=>setSort(e.target.value)}>
+          <option value="new">Nuevas</option>
+          <option value="cheap">Precio: bajo a alto</option>
+          <option value="exp">Precio: alto a bajo</option>
+        </select>
+      </div>
+
+      <div className="grid">
+        {sorted.length ? sorted.map(p => <ProductCard key={p.id} product={p} />)
+         : <div className="empty">No se encontraron cartas</div>}
       </div>
     </div>
-  );
+  )
 }
