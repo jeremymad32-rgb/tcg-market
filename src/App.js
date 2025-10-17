@@ -1,49 +1,101 @@
 import React, { useState } from "react";
-import Login from "./components/Login";
-import CardUpload from "./components/CardUpload";
-import Shop from "./components/Shop";
-import Cart from "./components/Cart";
-import Forum from "./components/Forum";
+import "./styles.css";
 
-export default function App() {
-  const [user, setUser] = useState(null);
-  const [page, setPage] = useState("login");
-  const [cartItems, setCartItems] = useState([]);
+function App() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [commentText, setCommentText] = useState("");
+
+  const handleLogin = () => {
+    if (username && email) {
+      setLoggedIn(true);
+      alert(`¡Bienvenido ${username}!`);
+    } else {
+      alert("Por favor completa nombre y correo.");
+    }
+  };
+
+  const handleAddComment = () => {
+    if (commentText) {
+      setComments([...comments, { name: username, text: commentText }]);
+      setCommentText("");
+    }
+  };
 
   return (
-    <div className="app">
-      {/* Mensaje de noticias animado */}
-      {page !== "login" && (
-        <div className="news-banner">
-          <p>📰 Noticias: Hola guapa... 🔁</p>
+    <div
+      className="app"
+      style={{
+        backgroundImage: `url(${process.env.PUBLIC_URL}/images/background.jpg)`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+        color: "#fff",
+        textAlign: "center",
+      }}
+    >
+      {!loggedIn ? (
+        <div className="login-container">
+          <h2>Ingresa tu nombre y correo</h2>
+          <input
+            type="text"
+            placeholder="Nombre"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="email"
+            placeholder="Correo"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button onClick={handleLogin}>Ingresar</button>
         </div>
-      )}
+      ) : (
+        <>
+          <h1>¡Bienvenido {username}!</h1>
+          <img
+            src={`${process.env.PUBLIC_URL}/images/yu-gi-oh.png`}
+            alt="Yu Gi Oh"
+            style={{ width: "150px", margin: "20px 0" }}
+          />
 
-      {/* Navegación */}
-      {page !== "login" && (
-        <nav className="nav-bar">
-          <button onClick={() => setPage("home")}>Home</button>
-          <button onClick={() => setPage("shop")}>Compra</button>
-          <button onClick={() => setPage("upload")}>Vende</button>
-          <button onClick={() => setPage("cart")}>Carrito</button>
-          <button onClick={() => setPage("forum")}>Foro</button>
-        </nav>
-      )}
+          <div className="buttons-container">
+            <button className="main-button">Home</button>
+            <button className="main-button">Compra</button>
+            <button className="main-button">Venta</button>
+          </div>
 
-      {/* Páginas */}
-      {page === "login" && <Login setUser={setUser} setPage={setPage} />}
-      {page === "home" && (
-        <div className="home">
-          <h2>Bienvenido {user?.name}</h2>
-          <img src="/images/yugioh1.jpg" alt="Yu-Gi-Oh" className="welcome-img" />
-        </div>
+          <div className="scrolling-message">
+            Noticias hola guapa... Noticias hola guapa... Noticias hola guapa...
+          </div>
+
+          <div className="forum">
+            <h2>Foro de comentarios</h2>
+            <input
+              type="text"
+              placeholder="Escribe un comentario"
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+            />
+            <button onClick={handleAddComment}>Comentar</button>
+
+            <div className="comments-list">
+              {comments.map((c, index) => (
+                <div key={index} className="comment">
+                  <strong>{c.name}:</strong> {c.text}
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
       )}
-      {page === "upload" && <CardUpload user={user} />}
-      {page === "shop" && <Shop cartItems={cartItems} setCartItems={setCartItems} />}
-      {page === "cart" && <Cart cartItems={cartItems} />}
-      {page === "forum" && <Forum user={user} />}
     </div>
   );
 }
+
+export default App;
 
 
