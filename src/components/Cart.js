@@ -1,17 +1,17 @@
 import React from "react";
 
-function Cart({cart, goBack}) {
-  const total = cart.reduce((acc,c)=>acc+parseFloat(c.price),0);
-  
-  const handleConfirm = () => {
-    alert(`✅ Compra confirmada! Total: $${total}`);
-    goBack();
-  };
-
+export default function Cart({ cartItems }) {
+  const total = cartItems.reduce((sum, item) => sum + Number(item.price), 0);
   return (
-    <div style={{padding:"20px"}}>
+    <div>
       <h2>Carrito</h2>
-      {cart.length===0 ? <p>Tu carrito está vacío</p> : null}
-      <ul>
-        {cart.map((c,i)=><li
+      {cartItems.map((item,i)=>(
+        <div key={i}>
+          <p>{item.name} - {item.price} $</p>
+        </div>
+      ))}
+      <h3>Total: {total} $</h3>
+    </div>
+  );
+}
 

@@ -1,30 +1,27 @@
 import React, { useState } from "react";
 
-function Login({login}) {
+export default function Login({ setUser, setPage }) {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if(!email) return;
-    login(email);
+  const handleLogin = () => {
+    if (!email) return alert("Ingresa tu email");
+    setUser({ email });
+    setPage("shop");
+    alert(`Bienvenido ${email}, has iniciado sesión correctamente`);
   };
 
   return (
-    <div style={{padding:"20px"}}>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="email" 
-          placeholder="Tu email" 
-          value={email} 
-          onChange={e=>setEmail(e.target.value)} 
-        /><br/><br/>
-        <button type="submit">Ingresar</button>
-      </form>
+    <div className="login">
+      <h1>TCG Market</h1>
+      <input
+        type="email"
+        placeholder="Ingresa tu email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <button onClick={handleLogin}>Ingresar</button>
     </div>
   );
 }
-
-export default Login;
 
 

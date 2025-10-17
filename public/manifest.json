@@ -1,0 +1,21 @@
+{
+  "short_name": "TCGMarket",
+  "name": "Trading Card Market",
+  "icons": [
+    {
+      "src": "/images/yugioh1.jpg",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/pokemon1.jpg",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f0f8ff",
+  "theme_color": "#007acc"
+}
+

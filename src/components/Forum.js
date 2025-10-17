@@ -1,45 +1,25 @@
 import React, { useState } from "react";
 
-function Forum({ user }) {
+export default function Forum({ user }) {
   const [comments, setComments] = useState([]);
   const [text, setText] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!text) return;
-    setComments([...comments, { user, text }]);
+  const handleComment = () => {
+    if(!text) return;
+    setComments([...comments, { user: user.email, text }]);
     setText("");
-  };
+  }
 
   return (
-    <div style={{ padding: "20px", backgroundColor: "rgba(0,0,0,0.5)" }}>
+    <div>
       <h2>Foro</h2>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          placeholder="Escribe tu comentario..."
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          style={{ width: "100%", height: "60px" }}
-        />
-        <br />
-        <button type="submit">Comentar</button>
-      </form>
-      <div style={{ marginTop: "20px" }}>
-        {comments.map((c, i) => (
-          <div
-            key={i}
-            style={{
-              border: "1px solid #fff",
-              padding: "10px",
-              marginBottom: "10px",
-            }}
-          >
-            <strong>{c.user}:</strong> {c.text}
-          </div>
+      <textarea value={text} onChange={(e)=>setText(e.target.value)} placeholder="Escribe tu comentario" />
+      <button onClick={handleComment}>Comentar</button>
+      <div>
+        {comments.map((c,i)=>(
+          <p key={i}><b>{c.user}:</b> {c.text}</p>
         ))}
       </div>
     </div>
   );
 }
-
-export default Forum;

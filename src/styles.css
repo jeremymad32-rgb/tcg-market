@@ -1,0 +1,32 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f8ff;
+  margin: 0;
+  padding: 0;
+}
+
+.app nav {
+  background: #007acc;
+  padding: 10px;
+}
+
+.app nav button {
+  margin: 5px;
+  padding: 8px 12px;
+  background: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login, .card-upload, .shop-list, .cards-list, textarea {
+  margin: 20px;
+}
+
+.shop-list div, .cards-list div {
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin: 5px;
+  display: inline-block;
+  text-align: center;
+}
