@@ -1,101 +1,97 @@
 import React, { useState } from "react";
+import background from "./images/background.jpg";
+import Products from "./Products"; // tu arreglo de productos
 import "./styles.css";
-import Products from "./components/Products";
 
 function App() {
-  const [activeSection, setActiveSection] = useState("inicio");
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [page, setPage] = useState("home");
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const renderSection = () => {
-    switch (activeSection) {
-      case "productos":
-        return <Products />;
+  const filteredProducts = Products.filter(product =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-      case "buscar":
+  const renderContent = () => {
+    switch (page) {
+      case "home":
+        return <h1>Bienvenido a TCG Marketplace</h1>;
+
+      case "myProducts":
         return (
-          <div className="search-section">
-            <h2>🔍 Buscar cartas</h2>
+          <div>
+            <h2>Mis Productos</h2>
+            {filteredProducts.map((product, idx) => (
+              <div key={idx} className="product-card">
+                <img src={product.image} alt={product.name} />
+                <p>{product.name}</p>
+              </div>
+            ))}
+          </div>
+        );
+
+      case "search":
+        return (
+          <div>
+            <h2>Buscar Cartas</h2>
             <input
               type="text"
-              placeholder="Escribe el nombre de la carta..."
-              className="search-input"
+              placeholder="Busca tu carta..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <div className="search-results">
-              <p>Empieza a escribir para buscar tus cartas favoritas 💫</p>
+            <div className="products-container">
+              {filteredProducts.map((product, idx) => (
+                <div key={idx} className="product-card">
+                  <img src={product.image} alt={product.name} />
+                  <p>{product.name}</p>
+                </div>
+              ))}
             </div>
           </div>
         );
 
-      case "noticias":
+      case "news":
         return (
-          <div className="section-news">
-            <h2>📰 Noticias</h2>
-            <textarea
-              placeholder="Escribe las últimas noticias del mundo TCG..."
-              className="news-input"
-            />
+          <div>
+            <h2>Noticias</h2>
+            <textarea placeholder="Escribe aquí tus noticias..."></textarea>
           </div>
         );
 
-      case "eventos":
-        return (
-          <div className="section-events">
-            <h2>🎉 Próximos eventos de TCG</h2>
-            <p>
-              Aquí verás los torneos y lanzamientos próximos de Yu-Gi-Oh!, Magic y
-              Pokémon.
-            </p>
-          </div>
-        );
+      case "events":
+        return <h2>Eventos Próximos</h2>;
 
       default:
-        return (
-          <div className="welcome-section">
-            <h2 className="section-title">
-              Bienvenido al <span>TCG Market</span> 🪙
-            </h2>
-            <p>Compra, vende y descubre las cartas más poderosas del mundo TCG.</p>
-          </div>
-        );
+        return <h1>Bienvenido a TCG Marketplace</h1>;
     }
   };
 
   return (
-    <div className="app">
-      {/* Banner animado de noticias */}
-      <div className="news-banner">
-        <p>📰 Noticias: ¡Hola guapa! ✨ — Bienvenido al TCG Market 💎 — Torneos cada semana 🎮</p>
-      </div>
+    <div
+      className="app"
+      style={{
+        backgroundImage: `url(${background})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+        color: "#fff",
+        textAlign: "center",
+      }}
+    >
+      <nav className="navbar">
+        <button onClick={() => setPage("home")}>Inicio</button>
+        <button onClick={() => setPage("myProducts")}>Mis Productos</button>
+        <button onClick={() => setPage("search")}>Buscar Cartas</button>
+        <button onClick={() => setPage("news")}>Noticias</button>
+        <button onClick={() => setPage("events")}>Eventos</button>
+      </nav>
 
-      {/* Menú superior */}
-      <header className="header">
-        <div className="logo">TCG Market</div>
+      <div className="content">{renderContent()}</div>
 
-        <button
-          className="menu-toggle"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          ☰
-        </button>
-
-        <nav className={`menu ${menuOpen ? "open" : ""}`}>
-          <button onClick={() => setActiveSection("inicio")}>🏠 Inicio</button>
-          <button onClick={() => setActiveSection("productos")}>💼 Productos</button>
-          <button onClick={() => setActiveSection("buscar")}>🔍 Buscar</button>
-          <button onClick={() => setActiveSection("noticias")}>📰 Noticias</button>
-          <button onClick={() => setActiveSection("eventos")}>🎉 Eventos</button>
-        </nav>
-      </header>
-
-      {/* Contenido dinámico */}
-      <main className="main-content">{renderSection()}</main>
-
-      {/* Pie de página */}
-      <footer className="footer">
-        <p>Creada por <strong>Jere Arias</strong> © {new Date().getFullYear()}</p>
-      </footer>
+      <footer>Creada por Jere Arias</footer>
     </div>
   );
 }
 
 export default App;
+
