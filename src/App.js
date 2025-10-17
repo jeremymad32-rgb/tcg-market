@@ -1,38 +1,60 @@
-import React, { useState } from 'react';
-import { FaBars, FaTimes, FaNewspaper, FaShoppingCart, FaSearch, FaCalendarAlt, FaHome } from 'react-icons/fa';
-import './styles.css';
+import React, { useState } from "react";
+import "./styles.css";
+import Products from "./components/Products";
 
 function App() {
+  const [activeSection, setActiveSection] = useState("inicio");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [section, setSection] = useState('home');
-
-  const toggleMenu = () => setMenuOpen(!menuOpen);
-  const selectSection = (s) => {
-    setSection(s);
-    setMenuOpen(false);
-  };
 
   const renderSection = () => {
-    switch (section) {
-      case 'productos':
-        return <h2>Tus Productos Subidos</h2>;
-      case 'buscar':
-        return <h2>Buscar Cartas</h2>;
-      case 'noticias':
+    switch (activeSection) {
+      case "productos":
+        return <Products />;
+
+      case "buscar":
         return (
-          <div className="noticias">
-            <h2>Noticias</h2>
-            <p>Aquí aparecerán las últimas novedades del mundo TCG.</p>
+          <div className="search-section">
+            <h2>🔍 Buscar cartas</h2>
+            <input
+              type="text"
+              placeholder="Escribe el nombre de la carta..."
+              className="search-input"
+            />
+            <div className="search-results">
+              <p>Empieza a escribir para buscar tus cartas favoritas 💫</p>
+            </div>
           </div>
         );
-      case 'eventos':
-        return <h2>Eventos</h2>;
+
+      case "noticias":
+        return (
+          <div className="section-news">
+            <h2>📰 Noticias</h2>
+            <textarea
+              placeholder="Escribe las últimas noticias del mundo TCG..."
+              className="news-input"
+            />
+          </div>
+        );
+
+      case "eventos":
+        return (
+          <div className="section-events">
+            <h2>🎉 Próximos eventos de TCG</h2>
+            <p>
+              Aquí verás los torneos y lanzamientos próximos de Yu-Gi-Oh!, Magic y
+              Pokémon.
+            </p>
+          </div>
+        );
+
       default:
         return (
-          <div className="bienvenida">
-            <h2>Bienvenido a TCG Market</h2>
-            <p>Compra, vende y comparte tu pasión por Yu-Gi-Oh, Pokémon y más.</p>
-            <img src="/images/yugioh.png" alt="Yu-Gi-Oh" className="welcome-img" />
+          <div className="welcome-section">
+            <h2 className="section-title">
+              Bienvenido al <span>TCG Market</span> 🪙
+            </h2>
+            <p>Compra, vende y descubre las cartas más poderosas del mundo TCG.</p>
           </div>
         );
     }
@@ -40,28 +62,38 @@ function App() {
 
   return (
     <div className="app">
-      <div className="ticker">
-        <div className="ticker__content">📰 Noticias: ¡Hola Guapa! 👋 | ¡Bienvenido a TCG Market! | Nuevos torneos pronto...</div>
+      {/* Banner animado de noticias */}
+      <div className="news-banner">
+        <p>📰 Noticias: ¡Hola guapa! ✨ — Bienvenido al TCG Market 💎 — Torneos cada semana 🎮</p>
       </div>
 
+      {/* Menú superior */}
       <header className="header">
-        <button className="menu-btn" onClick={toggleMenu}>
-          {menuOpen ? <FaTimes /> : <FaBars />}
+        <div className="logo">TCG Market</div>
+
+        <button
+          className="menu-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          ☰
         </button>
-        <h1>TCG Market</h1>
+
+        <nav className={`menu ${menuOpen ? "open" : ""}`}>
+          <button onClick={() => setActiveSection("inicio")}>🏠 Inicio</button>
+          <button onClick={() => setActiveSection("productos")}>💼 Productos</button>
+          <button onClick={() => setActiveSection("buscar")}>🔍 Buscar</button>
+          <button onClick={() => setActiveSection("noticias")}>📰 Noticias</button>
+          <button onClick={() => setActiveSection("eventos")}>🎉 Eventos</button>
+        </nav>
       </header>
 
-      <nav className={`sidebar ${menuOpen ? 'open' : ''}`}>
-        <button onClick={() => selectSection('home')}><FaHome /> Home</button>
-        <button onClick={() => selectSection('productos')}><FaShoppingCart /> Mis Productos</button>
-        <button onClick={() => selectSection('buscar')}><FaSearch /> Buscar</button>
-        <button onClick={() => selectSection('noticias')}><FaNewspaper /> Noticias</button>
-        <button onClick={() => selectSection('eventos')}><FaCalendarAlt /> Eventos</button>
-      </nav>
+      {/* Contenido dinámico */}
+      <main className="main-content">{renderSection()}</main>
 
-      <main className="main">{renderSection()}</main>
-
-      <footer className="footer">Creado por <strong>Jere Arias</strong></footer>
+      {/* Pie de página */}
+      <footer className="footer">
+        <p>Creada por <strong>Jere Arias</strong> © {new Date().getFullYear()}</p>
+      </footer>
     </div>
   );
 }

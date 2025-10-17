@@ -1,0 +1,63 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  height: 100%;
+  background: url("/images/background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.main-content {
+  flex: 1;
+  padding: 3rem;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.section-title {
+  font-size: 2rem;
+  color: #ffd700;
+}
+
+.section-title span {
+  color: #ff4d4d;
+}
+
+.section-news {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.news-input {
+  width: 80%;
+  height: 150px;
+  border-radius: 12px;
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  resize: none;
+  margin-top: 1rem;
+}
+
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: rgba(20, 20, 20, 0.7);
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

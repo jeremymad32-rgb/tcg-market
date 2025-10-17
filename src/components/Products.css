@@ -1,0 +1,88 @@
+.products-section {
+  text-align: center;
+  padding: 2rem;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.product-card {
+  background: rgba(20, 20, 20, 0.8);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+}
+
+.product-img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.product-card h3 {
+  margin: 0.8rem 0 0.3rem;
+  color: #ffd700;
+  font-size: 1.2rem;
+}
+
+.condition {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.price {
+  font-size: 1.1rem;
+  color: #00ff99;
+  margin-top: 0.5rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.buy-btn,
+.sell-btn,
+.details-btn {
+  border: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.buy-btn {
+  background: #00b894;
+  color: white;
+}
+
+.sell-btn {
+  background: #e17055;
+  color: white;
+}
+
+.details-btn {
+  background: #0984e3;
+  color: white;
+}
+
+.buy-btn:hover,
+.sell-btn:hover,
+.details-btn:hover {
+  transform: scale(1.05);
+}
+
+
