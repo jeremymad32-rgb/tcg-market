@@ -12,16 +12,32 @@ export default function App() {
 
   return (
     <div className="app">
+      {/* Mensaje de noticias animado */}
       {page !== "login" && (
-        <nav>
+        <div className="news-banner">
+          <p>📰 Noticias: Hola guapa... 🔁</p>
+        </div>
+      )}
+
+      {/* Navegación */}
+      {page !== "login" && (
+        <nav className="nav-bar">
+          <button onClick={() => setPage("home")}>Home</button>
           <button onClick={() => setPage("shop")}>Compra</button>
-          <button onClick={() => setPage("upload")}>Vende tus cartas</button>
+          <button onClick={() => setPage("upload")}>Vende</button>
           <button onClick={() => setPage("cart")}>Carrito</button>
           <button onClick={() => setPage("forum")}>Foro</button>
         </nav>
       )}
 
+      {/* Páginas */}
       {page === "login" && <Login setUser={setUser} setPage={setPage} />}
+      {page === "home" && (
+        <div className="home">
+          <h2>Bienvenido {user?.name}</h2>
+          <img src="/images/yugioh1.jpg" alt="Yu-Gi-Oh" className="welcome-img" />
+        </div>
+      )}
       {page === "upload" && <CardUpload user={user} />}
       {page === "shop" && <Shop cartItems={cartItems} setCartItems={setCartItems} />}
       {page === "cart" && <Cart cartItems={cartItems} />}
