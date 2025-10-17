@@ -24,7 +24,7 @@ export default function App() {
       {page === "login" && <Login setUser={setUser} setPage={setPage} />}
       {page === "upload" && <CardUpload user={user} />}
       {page === "shop" && <Shop cartItems={cartItems} setCartItems={setCartItems} />}
-      {page === "cart" && <Cart cartItems={cartItems} setCartItems={setCartItems} />}
+      {page === "cart" && <Cart cartItems={cartItems} />}
       {page === "forum" && <Forum user={user} />}
     </div>
   );
