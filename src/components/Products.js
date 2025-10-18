@@ -1,60 +1,46 @@
-import React from "react";
-import "./Products.css";
+// src/Products.js
 
-const products = [
+const Products = [
   {
     id: 1,
-    name: "Blue-Eyes White Dragon",
-    price: "$25.00",
-    image: "https://images.ygoprodeck.com/images/cards/89631139.jpg",
-    condition: "Near Mint",
+    name: "Charizard",
+    type: "Fire",
+    rarity: "Ultra Rare",
+    price: 120,
+    image: "/images/cards/charizard.jpg"
   },
   {
     id: 2,
-    name: "Dark Magician",
-    price: "$18.00",
-    image: "https://images.ygoprodeck.com/images/cards/46986414.jpg",
-    condition: "Lightly Played",
+    name: "Pikachu",
+    type: "Electric",
+    rarity: "Rare",
+    price: 50,
+    image: "/images/cards/pikachu.jpg"
   },
   {
     id: 3,
-    name: "Red-Eyes Black Dragon",
-    price: "$20.00",
-    image: "https://images.ygoprodeck.com/images/cards/74677422.jpg",
-    condition: "Mint",
+    name: "Blastoise",
+    type: "Water",
+    rarity: "Ultra Rare",
+    price: 100,
+    image: "/images/cards/blastoise.jpg"
   },
   {
     id: 4,
-    name: "Exodia the Forbidden One",
-    price: "$50.00",
-    image: "https://images.ygoprodeck.com/images/cards/33396948.jpg",
-    condition: "Mint",
+    name: "Mewtwo",
+    type: "Psychic",
+    rarity: "Legendary",
+    price: 200,
+    image: "/images/cards/mewtwo.jpg"
   },
+  {
+    id: 5,
+    name: "Snorlax",
+    type: "Normal",
+    rarity: "Rare",
+    price: 60,
+    image: "/images/cards/snorlax.jpg"
+  }
 ];
 
-const Products = () => {
-  return (
-    <div className="products-section">
-      <h2>🃏 Tus productos subidos</h2>
-      <div className="product-grid">
-        {products.map((card) => (
-          <div key={card.id} className="product-card">
-            <img src={card.image} alt={card.name} className="product-img" />
-            <h3>{card.name}</h3>
-            <p className="condition">Condición: {card.condition}</p>
-            <p className="price">{card.price}</p>
-            <div className="buttons">
-              <button className="buy-btn">Comprar</button>
-              <button className="sell-btn">Vender</button>
-              <button className="details-btn">Ver más</button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
 export default Products;
-
-
