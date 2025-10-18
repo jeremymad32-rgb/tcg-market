@@ -13,9 +13,7 @@ function App() {
   return (
     <div
       style={{
-        backgroundImage: `url("/images/background.jpg")`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundColor: "#1e1e1e", // fondo oscuro sólido
         minHeight: "100vh",
         color: "#fff",
         fontFamily: "Arial, sans-serif",
@@ -28,7 +26,7 @@ function App() {
           justifyContent: "space-between",
           alignItems: "center",
           padding: "1rem 2rem",
-          backgroundColor: "rgba(0,0,0,0.7)",
+          backgroundColor: "#121212",
         }}
       >
         <h1 style={{ margin: 0 }}>TCG Marketplace</h1>
@@ -73,7 +71,7 @@ function App() {
                 <div
                   key={product.id}
                   style={{
-                    backgroundColor: "rgba(0,0,0,0.6)",
+                    backgroundColor: "#2a2a2a",
                     padding: "1rem",
                     borderRadius: "10px",
                   }}
@@ -118,7 +116,7 @@ function App() {
                 <div
                   key={product.id}
                   style={{
-                    backgroundColor: "rgba(0,0,0,0.6)",
+                    backgroundColor: "#2a2a2a",
                     padding: "1rem",
                     borderRadius: "10px",
                   }}
@@ -166,7 +164,7 @@ function App() {
         style={{
           textAlign: "center",
           padding: "1rem",
-          backgroundColor: "rgba(0,0,0,0.7)",
+          backgroundColor: "#121212",
           marginTop: "2rem",
         }}
       >
